@@ -15,9 +15,8 @@ import cv2
 def main():
     show_version()
     image_name_in, flag_value, window_name, image_name_out, video_name_out = \
-        'data/lena.jpg', 1, 'lena', 'data/lena_copy.png', 'data/gilles.avi'
+        'data/lena.jpg', 1, 'lena', 'data/lena_copy.png', 'data/gilles.mp4'
     image = read_image(file=image_name_in, flag_val=flag_value)
-    print(type(image))
     show_image(windowname=window_name, image=image)
     write_image(file=image_name_out, image=image)
     capture_livestream_video(videoout=video_name_out, colour=True)
@@ -90,7 +89,7 @@ def capture_livestream_video(
     # VideoCapture.read() grabs, decodes, returns the bool, next video frame
     # Try -1, 0, 1 for your camera
     capture_frame = cv2.VideoCapture(index=0)
-    fourcc_code = cv2.VideoWriter_fourcc(*'XVID')
+    fourcc_code = cv2.VideoWriter_fourcc(*'mp4v')
     save_video = cv2.VideoWriter(
         filename=videoout,
         fourcc=fourcc_code,
@@ -98,7 +97,7 @@ def capture_livestream_video(
         frameSize=(1280, 720)
         )
     # capture_frame = cv2.VideoCapture(filename='videofilename.avi')
-    while(True):
+    while True:
         # video_frame_bool is of type bool
         # True if a video frame is returned
         # False if a video frame is not returned
@@ -112,9 +111,9 @@ def capture_livestream_video(
                 f'fps {capture_frame.get(cv2.CAP_PROP_FPS)}'
             )
             save_video.write(video_frame)
-            if colour is True:
+            if colour:
                 cv2.imshow(winname='colour_frame', mat=video_frame)
-            elif colour is False:
+            else:
                 video_frame = cv2.cvtColor(
                     src=video_frame,
                     code=cv2.COLOR_BGR2GRAY
