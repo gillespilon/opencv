@@ -8,6 +8,7 @@ OpenCV for beginners YouTube video
 04 Read, write, show videos
 '''
 
+from typing import NoReturn
 import numpy as np
 import cv2
 
@@ -22,7 +23,7 @@ def main():
     capture_livestream_video(videoout=video_name_out, colour=True)
 
 
-def show_version() -> None:
+def show_version() -> NoReturn:
     '''
     Show version number of currently-installed OpenCV library.
     '''
@@ -31,9 +32,9 @@ def show_version() -> None:
 
 
 def read_image(
-    file: str,
-    flag_val: int
-) -> None:
+        file: str,
+        flag_val: int
+) -> NoReturn:
     '''
     Read an image.
 
@@ -48,7 +49,7 @@ def read_image(
 def show_image(
     windowname: str,
     image: np.ndarray
-) -> None:
+) -> NoReturn:
     '''
     Show image in a separate window.
 
@@ -65,7 +66,7 @@ def show_image(
 def write_image(
     file: str,
     image: np.ndarray
-) -> None:
+) -> NoReturn:
     '''
     Write an image.
 
